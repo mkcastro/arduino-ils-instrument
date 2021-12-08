@@ -64,6 +64,11 @@ void showVerticalDeviation()
 	moveVerticalIndicatorServo();
 }
 
+void showHorizontalDeviation()
+{
+	moveHorizontalIndicatorServo();
+}
+
 void setVerticalIndicatorServoPosition(int position)
 {
 	// make sure that position is between min and max servo positions
@@ -77,11 +82,6 @@ void setVerticalIndicatorServoPosition(int position)
 	}
 
 	verticalIndicatorServoPosition = position;
-}
-
-void showHorizontalDeviation()
-{
-	moveHorizontalIndicatorServo();
 }
 
 void setHorizontalIndicatorServoPosition(int position)
@@ -106,16 +106,16 @@ void moveVerticalIndicatorServo()
 	verticalIndicatorServo.write(verticalIndicatorServoPosition);
 }
 
-void calculateVerticalIndicatorServoPosition()
-{
-	setVerticalIndicatorServoPosition(getUpperPhotoresistorTotal() > getLowerPhotoresistorTotal() ? verticalIndicatorServoPosition + verticalIndicatorServoStep : verticalIndicatorServoPosition - verticalIndicatorServoStep);
-}
-
 void moveHorizontalIndicatorServo()
 {
 	calculateHorizontalIndicatorServoPosition();
 
 	horizontalIndicatorServo.write(horizontalIndicatorServoPosition);
+}
+
+void calculateVerticalIndicatorServoPosition()
+{
+	setVerticalIndicatorServoPosition(getUpperPhotoresistorTotal() > getLowerPhotoresistorTotal() ? verticalIndicatorServoPosition + verticalIndicatorServoStep : verticalIndicatorServoPosition - verticalIndicatorServoStep);
 }
 
 void calculateHorizontalIndicatorServoPosition()
