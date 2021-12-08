@@ -61,8 +61,6 @@ void showDeviations()
 
 void showVerticalDeviation()
 {
-	setVerticalIndicatorServoPosition(getUpperPhotoresistorTotal() > getLowerPhotoresistorTotal() ? verticalIndicatorServoPosition + verticalIndicatorServoStep : verticalIndicatorServoPosition - verticalIndicatorServoStep);
-
 	moveVerticalIndicatorServo();
 }
 
@@ -105,7 +103,14 @@ void setHorizontalIndicatorServoPosition(int position)
 
 void moveVerticalIndicatorServo()
 {
+	setVerticalIndicatorServoPosition();
+
 	verticalIndicatorServo.write(verticalIndicatorServoPosition);
+}
+
+void setVerticalIndicatorServoPosition()
+{
+	setVerticalIndicatorServoPosition(getUpperPhotoresistorTotal() > getLowerPhotoresistorTotal() ? verticalIndicatorServoPosition + verticalIndicatorServoStep : verticalIndicatorServoPosition - verticalIndicatorServoStep);
 }
 
 void moveHorizontalIndicatorServo()
