@@ -39,6 +39,10 @@ void setup()
 	pinMode(lowerLeftPhotoresistor, INPUT);
 	pinMode(lowerRightPhotoresistor, INPUT);
 
+	// set servo pins to output
+	pinMode(verticalServoPin, OUTPUT);
+	pinMode(horizontalServoPin, OUTPUT);
+
 	// initialize servos
 	verticalServo.attach(verticalServoPin);
 	horizontalServo.attach(horizontalServoPin);
