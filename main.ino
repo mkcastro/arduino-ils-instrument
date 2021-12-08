@@ -1,3 +1,6 @@
+// import servo library
+#include <Servo.h>
+
 // setup pin constants for 4 photoresistors
 const int upperLeftPhotoresistor = A0;
 const int upperRightPhotoresistor = A1;
@@ -7,9 +10,6 @@ const int lowerRightPhotoresistor = A3;
 // setup pin constants for 2 servros
 const int verticalIndicatorServoPin = 9;
 const int horizontalIndicatorServoPin = 10;
-
-// import servo library
-#include <Servo.h>
 
 // setup servos
 Servo verticalIndicatorServo;
@@ -22,6 +22,14 @@ int horizontalIndicatorServoPosition = 90;
 // setup constant servo steps
 const int verticalIndicatorServoStep = 10;
 const int horizontalIndicatorServoStep = 10;
+
+// setup minimum servo positions
+const int verticalIndicatorServoMin = 0;
+const int horizontalIndicatorServoMin = 0;
+
+// setup maximum servo positions
+const int verticalIndicatorServoMax = 180;
+const int horizontalIndicatorServoMax = 180;
 
 void setup()
 {
@@ -40,12 +48,69 @@ void setup()
 	horizontalIndicatorServo.write(horizontalIndicatorServoPosition);
 }
 
-void main()
+int main()
 {
-	setVerticalIndicatorServoPosition();
-	setHorizontalIndicatorServoPosition();
-	indicateDeviations();
-	delay(1000);
+	showDeviations();
+}
+
+void showDeviations()
+{
+	showVerticalDeviation();
+	showHorizontalDeviation();
+}
+
+void showVerticalDeviation()
+{
+	setVerticalIndicatorServoPosition(getUpperPhotoresistorTotal() > getLowerPhotoresistorTotal() ? verticalIndicatorServoPosition + verticalIndicatorServoStep : verticalIndicatorServoPosition - verticalIndicatorServoStep);
+
+	moveVerticalIndicatorServo();
+}
+
+void setVerticalIndicatorServoPosition(int position)
+{
+	// make sure that position is between min and max servo positions
+	if (position < verticalIndicatorServoMin)
+	{
+		position = verticalIndicatorServoMin;
+	}
+	else if (position > verticalIndicatorServoMax)
+	{
+		position = verticalIndicatorServoMax;
+	}
+
+	verticalIndicatorServoPosition = position;
+}
+
+void showHorizontalDeviation()
+{
+	setHorizontalIndicatorServoPosition(getLeftPhotoresistorTotal() > getRightPhotoresistorTotal() ? horizontalIndicatorServoPosition - horizontalIndicatorServoStep : horizontalIndicatorServoPosition + horizontalIndicatorServoStep);
+
+	moveHorizontalIndicatorServo();
+}
+
+void setHorizontalIndicatorServoPosition(int position)
+{
+	// make sure that position is between min and max servo positions
+	if (position < horizontalIndicatorServoMin)
+	{
+		position = horizontalIndicatorServoMin;
+	}
+	else if (position > horizontalIndicatorServoMax)
+	{
+		position = horizontalIndicatorServoMax;
+	}
+
+	horizontalIndicatorServoPosition = position;
+}
+
+void moveVerticalIndicatorServo()
+{
+	verticalIndicatorServo.write(verticalIndicatorServoPosition);
+}
+
+void moveHorizontalIndicatorServo()
+{
+	horizontalIndicatorServo.write(horizontalIndicatorServoPosition);
 }
 
 // create a function to set vertical servo position based on the difference of the upper and lower photoresistors
