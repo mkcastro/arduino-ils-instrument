@@ -8,28 +8,28 @@ const int lowerLeftPhotoresistor = A2;
 const int lowerRightPhotoresistor = A3;
 
 // setup pin constants for 2 servros
-const int verticalDeviationIndicatorServoPin = 9;
-const int horizontalDeviationIndicatorServoPin = 10;
+const int verticalServoPin = 9;
+const int horizontalServoPin = 10;
 
 // setup servos
-Servo verticalIndicatorServo;
-Servo horizontalIndicatorServo;
+Servo verticalServo;
+Servo horizontalServo;
 
 // setup servo positions
-int verticalIndicatorServoPosition = 90;
-int horizontalIndicatorServoPosition = 90;
+int verticalServoPosition = 90;
+int horizontalServoPosition = 90;
 
 // setup constant servo steps
-const int verticalIndicatorServoStep = 10;
-const int horizontalIndicatorServoStep = 10;
+const int verticalServoStep = 10;
+const int horizontalServoStep = 10;
 
 // setup minimum servo positions
-const int verticalIndicatorServoMin = 0;
-const int horizontalIndicatorServoMin = 0;
+const int verticalServoMin = 0;
+const int horizontalServoMin = 0;
 
 // setup maximum servo positions
-const int verticalIndicatorServoMax = 180;
-const int horizontalIndicatorServoMax = 180;
+const int verticalServoMax = 180;
+const int horizontalServoMax = 180;
 
 void setup()
 {
@@ -40,12 +40,12 @@ void setup()
 	pinMode(lowerRightPhotoresistor, INPUT);
 
 	// initialize servos
-	verticalIndicatorServo.attach(verticalDeviationIndicatorServoPin);
-	horizontalIndicatorServo.attach(horizontalDeviationIndicatorServoPin);
+	verticalServo.attach(verticalServoPin);
+	horizontalServo.attach(horizontalServoPin);
 
 	// move servos to starting positions
-	verticalIndicatorServo.write(verticalIndicatorServoPosition);
-	horizontalIndicatorServo.write(horizontalIndicatorServoPosition);
+	verticalServo.write(verticalServoPosition);
+	horizontalServo.write(horizontalServoPosition);
 }
 
 int main()
@@ -61,78 +61,78 @@ void showDeviations()
 
 void showVerticalDeviation()
 {
-	moveVerticalIndicatorServo();
+	moveVerticalServo();
 }
 
 void showHorizontalDeviation()
 {
-	moveHorizontalIndicatorServo();
+	moveHorizontalServo();
 }
 
-void setVerticalIndicatorServoPosition(int position)
+void setVerticalServoPosition(int position)
 {
 	// make sure that position is between min and max servo positions
-	if (position < verticalIndicatorServoMin)
+	if (position < verticalServoMin)
 	{
-		position = verticalIndicatorServoMin;
+		position = verticalServoMin;
 	}
-	else if (position > verticalIndicatorServoMax)
+	else if (position > verticalServoMax)
 	{
-		position = verticalIndicatorServoMax;
+		position = verticalServoMax;
 	}
 
-	verticalIndicatorServoPosition = position;
+	verticalServoPosition = position;
 }
 
-void setHorizontalIndicatorServoPosition(int position)
+void setHorizontalServoPosition(int position)
 {
 	// make sure that position is between min and max servo positions
-	if (position < horizontalIndicatorServoMin)
+	if (position < horizontalServoMin)
 	{
-		position = horizontalIndicatorServoMin;
+		position = horizontalServoMin;
 	}
-	else if (position > horizontalIndicatorServoMax)
+	else if (position > horizontalServoMax)
 	{
-		position = horizontalIndicatorServoMax;
+		position = horizontalServoMax;
 	}
 
-	horizontalIndicatorServoPosition = position;
+	horizontalServoPosition = position;
 }
 
-void moveVerticalIndicatorServo()
+void moveVerticalServo()
 {
-	calculateVerticalIndicatorServoPosition();
+	calculateVerticalServoPosition();
 
-	verticalIndicatorServo.write(verticalIndicatorServoPosition);
+	verticalServo.write(verticalServoPosition);
 }
 
-void moveHorizontalIndicatorServo()
+void moveHorizontalServo()
 {
-	calculateHorizontalIndicatorServoPosition();
+	calculateHorizontalServoPosition();
 
-	horizontalIndicatorServo.write(horizontalIndicatorServoPosition);
+	horizontalServo.write(horizontalServoPosition);
 }
 
-void calculateVerticalIndicatorServoPosition()
+void calculateVerticalServoPosition()
 {
-	setVerticalIndicatorServoPosition(getUpperPhotoresistorTotal() > getLowerPhotoresistorTotal() ? verticalIndicatorServoPosition + verticalIndicatorServoStep : verticalIndicatorServoPosition - verticalIndicatorServoStep);
+	setVerticalServoPosition(getUpperPhotoresistorTotal() > getLowerPhotoresistorTotal() ? verticalServoPosition + verticalServoStep : verticalServoPosition - verticalServoStep);
 }
 
-void calculateHorizontalIndicatorServoPosition()
+void calculateHorizontalServoPosition()
 {
-	setHorizontalIndicatorServoPosition(getLeftPhotoresistorTotal() > getRightPhotoresistorTotal() ? horizontalIndicatorServoPosition - horizontalIndicatorServoStep : horizontalIndicatorServoPosition + horizontalIndicatorServoStep);
+	setHorizontalServoPosition(getLeftPhotoresistorTotal() > getRightPhotoresistorTotal() ? horizontalServoPosition - horizontalServoStep : horizontalServoPosition + horizontalServoStep);
 }
 
 // create a function to set vertical servo position based on the difference of the upper and lower photoresistors
-void setVerticalIndicatorServoPosition()
+void setVerticalServoPosition()
 {
 	// if the upper photoresistors are greater than the lower photoresistors, then set vertical indicator position higher, else set vertical indicator position lower
-	verticalIndicatorServoPosition = getUpperPhotoresistorTotal() > getLowerPhotoresistorTotal() ? verticalIndicatorServoPosition + verticalIndicatorServoStep : verticalIndicatorServoPosition - verticalIndicatorServoStep;
+	verticalServoPosition = getUpperPhotoresistorTotal() > getLowerPhotoresistorTotal() ? verticalServoPosition + verticalServoStep : verticalServoPosition - verticalServoStep;
 }
 
-void setHorizontalIndicatorServoPosition()
+void setHorizontalServoPosition()
 {
-	horizontalIndicatorServoPosition = getLeftPhotoresistorTotal() > getRightPhotoresistorTotal() ? horizontalIndicatorServoPosition + horizontalIndicatorServoStep : horizontalIndicatorServoPosition - horizontalIndicatorServoStep;
+	horizontalServoPosition = getLeftPhotoresistorTotal() > getRightPhotoresistorTotal() ? horizontalServoPosition + horizontalServoStep : horizontalServoPosition - horizontalServoStep;
 }
 
 // create a function to get the total of the upper photoresistors
