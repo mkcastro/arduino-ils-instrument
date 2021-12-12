@@ -31,6 +31,9 @@ const int horizontalServoMin = 0;
 const int verticalServoMax = 180;
 const int horizontalServoMax = 180;
 
+// setup servo delay duration
+const int servoDelay = 50;
+
 void setup()
 {
 	// set photoresistor pins to analog input
