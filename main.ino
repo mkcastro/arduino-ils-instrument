@@ -183,3 +183,9 @@ int getRightPhotoresistorTotal()
 {
 	return analogRead(upperRightPhotoresistor) + analogRead(lowerRightPhotoresistor);
 }
+
+void moveServoToPosition(Servo servo, int position)
+{
+	servo.write(position);
+	delay(servoDelay);
+}
