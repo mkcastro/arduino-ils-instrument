@@ -38,11 +38,6 @@ void setup()
 {
 	Serial.begin(9600);
 	Serial.println("Starting...");
-	// set photoresistor pins to analog input
-	pinMode(upperLeftPhotoresistor, INPUT);
-	pinMode(upperRightPhotoresistor, INPUT);
-	pinMode(lowerLeftPhotoresistor, INPUT);
-	pinMode(lowerRightPhotoresistor, INPUT);
 
 	// set servo pins to output
 	pinMode(verticalServoPin, OUTPUT);
