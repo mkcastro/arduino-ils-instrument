@@ -36,6 +36,8 @@ const int servoDelay = 50;
 
 void setup()
 {
+	Serial.begin(9600);
+	Serial.println("Starting...");
 	// set photoresistor pins to analog input
 	pinMode(upperLeftPhotoresistor, INPUT);
 	pinMode(upperRightPhotoresistor, INPUT);
