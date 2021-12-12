@@ -120,6 +120,13 @@ void moveVerticalServo()
     moveServoToPosition(verticalServo, verticalServoPosition);
 }
 
+void moveHorizontalServo()
+{
+    calculateHorizontalServoPosition();
+
+    moveServoToPosition(horizontalServo, horizontalServoPosition);
+}
+
 void calculateVerticalServoPosition()
 {
     setVerticalServoPosition(getUpperPhotoresistorTotal() > getLowerPhotoresistorTotal() ? verticalServoPosition + verticalServoStep : verticalServoPosition - verticalServoStep);
@@ -128,13 +135,6 @@ void calculateVerticalServoPosition()
 void calculateHorizontalServoPosition()
 {
     setHorizontalServoPosition(getLeftPhotoresistorTotal() > getRightPhotoresistorTotal() ? horizontalServoPosition - horizontalServoStep : horizontalServoPosition + horizontalServoStep);
-}
-
-void moveHorizontalServo()
-{
-    calculateHorizontalServoPosition();
-
-    moveServoToPosition(horizontalServo, horizontalServoPosition);
 }
 
 void setVerticalServoPosition(int position)
