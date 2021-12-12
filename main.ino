@@ -74,6 +74,26 @@ void setup()
 
 void loop()
 {
+    // show upper left photoresistor value
+    // Serial.print("Upper Left Photoresistor: ");
+    // Serial.println(analogRead(upperLeftPhotoresistor));
+    // delay(1000);
+
+    // show upper right photoresistor value
+    // Serial.print("Upper Right Photoresistor: ");
+    // Serial.println(analogRead(upperRightPhotoresistor));
+    // delay(1000);
+
+    // show lower left photoresistor value
+    // Serial.print("Lower Left Photoresistor: ");
+    // Serial.println(analogRead(lowerLeftPhotoresistor));
+    // delay(1000);
+
+    // show lower right photoresistor value
+    // Serial.print("Lower Right Photoresistor: ");
+    // Serial.println(analogRead(lowerRightPhotoresistor));
+    // delay(1000);
+
     showDeviations();
 }
 
