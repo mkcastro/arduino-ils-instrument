@@ -43,6 +43,33 @@ void setup()
 	verticalServo.attach(verticalServoPin);
 	horizontalServo.attach(horizontalServoPin);
 
+	// sweep vertial servo from 0 to 180
+	for (int i = 0; i < 180; i++)
+	{
+		verticalServo.write(i);
+		delay(servoDelay);
+	}
+
+	// sweep vertical servo from 180 to 90
+	for (int i = 180; i > 90; i--)
+	{
+		verticalServo.write(i);
+		delay(servoDelay);
+	}
+
+	// sweep horizontal servo from 0 to 90
+	for (int i = 0; i < 180; i++)
+	{
+		horizontalServo.write(i);
+		delay(servoDelay);
+	}
+
+	for (int i = 180; i > 90; i--)
+	{
+		horizontalServo.write(i);
+		delay(servoDelay);
+	}
+
 	// move servos to starting positions
 	verticalServo.write(verticalServoPosition);
 	horizontalServo.write(horizontalServoPosition);
