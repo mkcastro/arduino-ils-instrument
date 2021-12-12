@@ -32,7 +32,7 @@ const int verticalServoMax = 180;
 const int horizontalServoMax = 180;
 
 // setup servo delay duration
-const int servoDelay = 50;
+const int servoDelay = 15;
 
 void setup()
 {
