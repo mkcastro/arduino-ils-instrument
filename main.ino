@@ -113,6 +113,20 @@ void showHorizontalDeviation()
     moveHorizontalServo();
 }
 
+void moveVerticalServo()
+{
+    calculateVerticalServoPosition();
+
+    moveServoToPosition(verticalServo, verticalServoPosition);
+}
+
+void moveHorizontalServo()
+{
+    calculateHorizontalServoPosition();
+
+    moveServoToPosition(horizontalServo, horizontalServoPosition);
+}
+
 void setVerticalServoPosition(int position)
 {
     // make sure that position is between min and max servo positions
@@ -141,20 +155,6 @@ void setHorizontalServoPosition(int position)
     }
 
     horizontalServoPosition = position;
-}
-
-void moveVerticalServo()
-{
-    calculateVerticalServoPosition();
-
-    moveServoToPosition(verticalServo, verticalServoPosition);
-}
-
-void moveHorizontalServo()
-{
-    calculateHorizontalServoPosition();
-
-    moveServoToPosition(horizontalServo, horizontalServoPosition);
 }
 
 void calculateVerticalServoPosition()
