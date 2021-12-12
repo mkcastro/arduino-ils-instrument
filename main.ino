@@ -39,10 +39,6 @@ void setup()
 	Serial.begin(9600);
 	Serial.println("Starting...");
 
-	// set servo pins to output
-	pinMode(verticalServoPin, OUTPUT);
-	pinMode(horizontalServoPin, OUTPUT);
-
 	// initialize servos
 	verticalServo.attach(verticalServoPin);
 	horizontalServo.attach(horizontalServoPin);
