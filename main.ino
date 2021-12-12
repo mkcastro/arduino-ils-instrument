@@ -75,7 +75,7 @@ void setup()
 	horizontalServo.write(horizontalServoPosition);
 }
 
-int main()
+void loop()
 {
 	showDeviations();
 }
