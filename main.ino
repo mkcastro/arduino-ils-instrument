@@ -46,33 +46,30 @@ void setup()
 	// sweep vertial servo from 0 to 180
 	for (int i = 0; i < 180; i++)
 	{
-		verticalServo.write(i);
+		moveServoToPosition(verticalServo, i);
 		delay(servoDelay);
 	}
 
 	// sweep vertical servo from 180 to 90
 	for (int i = 180; i > 90; i--)
 	{
-		verticalServo.write(i);
-		delay(servoDelay);
+		moveServoToPosition(verticalServo, i);
 	}
 
 	// sweep horizontal servo from 0 to 90
 	for (int i = 0; i < 180; i++)
 	{
-		horizontalServo.write(i);
-		delay(servoDelay);
+		moveServoToPosition(horizontalServo, i);
 	}
 
 	for (int i = 180; i > 90; i--)
 	{
-		horizontalServo.write(i);
-		delay(servoDelay);
+		moveServoToPosition(horizontalServo, i);
 	}
 
 	// move servos to starting positions
-	verticalServo.write(verticalServoPosition);
-	horizontalServo.write(horizontalServoPosition);
+	moveServoToPosition(verticalServo, verticalServoPosition);
+	moveServoToPosition(horizontalServo, horizontalServoPosition);
 }
 
 void loop()
@@ -130,14 +127,14 @@ void moveVerticalServo()
 {
 	calculateVerticalServoPosition();
 
-	verticalServo.write(verticalServoPosition);
+	moveServoToPosition(verticalServo, verticalServoPosition);
 }
 
 void moveHorizontalServo()
 {
 	calculateHorizontalServoPosition();
 
-	horizontalServo.write(horizontalServoPosition);
+	moveServoToPosition(horizontalServo, horizontalServoPosition);
 }
 
 void calculateVerticalServoPosition()
