@@ -167,18 +167,6 @@ void setHorizontalServoPosition(int position)
     horizontalServoPosition = position;
 }
 
-// create a function to set vertical servo position based on the difference of the upper and lower photoresistors
-void setVerticalServoPosition()
-{
-    // if the upper photoresistors are greater than the lower photoresistors, then set vertical indicator position higher, else set vertical indicator position lower
-    verticalServoPosition = getUpperPhotoresistorTotal() > getLowerPhotoresistorTotal() ? verticalServoPosition + verticalServoStep : verticalServoPosition - verticalServoStep;
-}
-
-void setHorizontalServoPosition()
-{
-    horizontalServoPosition = getLeftPhotoresistorTotal() > getRightPhotoresistorTotal() ? horizontalServoPosition + horizontalServoStep : horizontalServoPosition - horizontalServoStep;
-}
-
 // create a function to get the total of the upper photoresistors
 int getUpperPhotoresistorTotal()
 {
