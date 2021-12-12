@@ -36,153 +36,153 @@ const int servoDelay = 50;
 
 void setup()
 {
-	Serial.begin(9600);
-	Serial.println("Starting...");
+    Serial.begin(9600);
+    Serial.println("Starting...");
 
-	// initialize servos
-	verticalServo.attach(verticalServoPin);
-	horizontalServo.attach(horizontalServoPin);
+    // initialize servos
+    verticalServo.attach(verticalServoPin);
+    horizontalServo.attach(horizontalServoPin);
 
-	// sweep vertial servo from 0 to 180
-	for (int i = 0; i < 180; i++)
-	{
-		moveServoToPosition(verticalServo, i);
-		delay(servoDelay);
-	}
+    // sweep vertial servo from 0 to 180
+    for (int i = 0; i < 180; i++)
+    {
+        moveServoToPosition(verticalServo, i);
+        delay(servoDelay);
+    }
 
-	// sweep vertical servo from 180 to 90
-	for (int i = 180; i > 90; i--)
-	{
-		moveServoToPosition(verticalServo, i);
-	}
+    // sweep vertical servo from 180 to 90
+    for (int i = 180; i > 90; i--)
+    {
+        moveServoToPosition(verticalServo, i);
+    }
 
-	// sweep horizontal servo from 0 to 90
-	for (int i = 0; i < 180; i++)
-	{
-		moveServoToPosition(horizontalServo, i);
-	}
+    // sweep horizontal servo from 0 to 90
+    for (int i = 0; i < 180; i++)
+    {
+        moveServoToPosition(horizontalServo, i);
+    }
 
-	for (int i = 180; i > 90; i--)
-	{
-		moveServoToPosition(horizontalServo, i);
-	}
+    for (int i = 180; i > 90; i--)
+    {
+        moveServoToPosition(horizontalServo, i);
+    }
 
-	// move servos to starting positions
-	moveServoToPosition(verticalServo, verticalServoPosition);
-	moveServoToPosition(horizontalServo, horizontalServoPosition);
+    // move servos to starting positions
+    moveServoToPosition(verticalServo, verticalServoPosition);
+    moveServoToPosition(horizontalServo, horizontalServoPosition);
 }
 
 void loop()
 {
-	showDeviations();
+    showDeviations();
 }
 
 void showDeviations()
 {
-	showVerticalDeviation();
-	showHorizontalDeviation();
+    showVerticalDeviation();
+    showHorizontalDeviation();
 }
 
 void showVerticalDeviation()
 {
-	moveVerticalServo();
+    moveVerticalServo();
 }
 
 void showHorizontalDeviation()
 {
-	moveHorizontalServo();
+    moveHorizontalServo();
 }
 
 void setVerticalServoPosition(int position)
 {
-	// make sure that position is between min and max servo positions
-	if (position < verticalServoMin)
-	{
-		position = verticalServoMin;
-	}
-	else if (position > verticalServoMax)
-	{
-		position = verticalServoMax;
-	}
+    // make sure that position is between min and max servo positions
+    if (position < verticalServoMin)
+    {
+        position = verticalServoMin;
+    }
+    else if (position > verticalServoMax)
+    {
+        position = verticalServoMax;
+    }
 
-	verticalServoPosition = position;
+    verticalServoPosition = position;
 }
 
 void setHorizontalServoPosition(int position)
 {
-	// make sure that position is between min and max servo positions
-	if (position < horizontalServoMin)
-	{
-		position = horizontalServoMin;
-	}
-	else if (position > horizontalServoMax)
-	{
-		position = horizontalServoMax;
-	}
+    // make sure that position is between min and max servo positions
+    if (position < horizontalServoMin)
+    {
+        position = horizontalServoMin;
+    }
+    else if (position > horizontalServoMax)
+    {
+        position = horizontalServoMax;
+    }
 
-	horizontalServoPosition = position;
+    horizontalServoPosition = position;
 }
 
 void moveVerticalServo()
 {
-	calculateVerticalServoPosition();
+    calculateVerticalServoPosition();
 
-	moveServoToPosition(verticalServo, verticalServoPosition);
+    moveServoToPosition(verticalServo, verticalServoPosition);
 }
 
 void moveHorizontalServo()
 {
-	calculateHorizontalServoPosition();
+    calculateHorizontalServoPosition();
 
-	moveServoToPosition(horizontalServo, horizontalServoPosition);
+    moveServoToPosition(horizontalServo, horizontalServoPosition);
 }
 
 void calculateVerticalServoPosition()
 {
-	setVerticalServoPosition(getUpperPhotoresistorTotal() > getLowerPhotoresistorTotal() ? verticalServoPosition + verticalServoStep : verticalServoPosition - verticalServoStep);
+    setVerticalServoPosition(getUpperPhotoresistorTotal() > getLowerPhotoresistorTotal() ? verticalServoPosition + verticalServoStep : verticalServoPosition - verticalServoStep);
 }
 
 void calculateHorizontalServoPosition()
 {
-	setHorizontalServoPosition(getLeftPhotoresistorTotal() > getRightPhotoresistorTotal() ? horizontalServoPosition - horizontalServoStep : horizontalServoPosition + horizontalServoStep);
+    setHorizontalServoPosition(getLeftPhotoresistorTotal() > getRightPhotoresistorTotal() ? horizontalServoPosition - horizontalServoStep : horizontalServoPosition + horizontalServoStep);
 }
 
 // create a function to set vertical servo position based on the difference of the upper and lower photoresistors
 void setVerticalServoPosition()
 {
-	// if the upper photoresistors are greater than the lower photoresistors, then set vertical indicator position higher, else set vertical indicator position lower
-	verticalServoPosition = getUpperPhotoresistorTotal() > getLowerPhotoresistorTotal() ? verticalServoPosition + verticalServoStep : verticalServoPosition - verticalServoStep;
+    // if the upper photoresistors are greater than the lower photoresistors, then set vertical indicator position higher, else set vertical indicator position lower
+    verticalServoPosition = getUpperPhotoresistorTotal() > getLowerPhotoresistorTotal() ? verticalServoPosition + verticalServoStep : verticalServoPosition - verticalServoStep;
 }
 
 void setHorizontalServoPosition()
 {
-	horizontalServoPosition = getLeftPhotoresistorTotal() > getRightPhotoresistorTotal() ? horizontalServoPosition + horizontalServoStep : horizontalServoPosition - horizontalServoStep;
+    horizontalServoPosition = getLeftPhotoresistorTotal() > getRightPhotoresistorTotal() ? horizontalServoPosition + horizontalServoStep : horizontalServoPosition - horizontalServoStep;
 }
 
 // create a function to get the total of the upper photoresistors
 int getUpperPhotoresistorTotal()
 {
-	return analogRead(upperLeftPhotoresistor) + analogRead(upperRightPhotoresistor);
+    return analogRead(upperLeftPhotoresistor) + analogRead(upperRightPhotoresistor);
 }
 
 // create a function to get the total of the lower photoresistors
 int getLowerPhotoresistorTotal()
 {
-	return analogRead(lowerLeftPhotoresistor) + analogRead(lowerRightPhotoresistor);
+    return analogRead(lowerLeftPhotoresistor) + analogRead(lowerRightPhotoresistor);
 }
 
 int getLeftPhotoresistorTotal()
 {
-	return analogRead(upperLeftPhotoresistor) + analogRead(lowerLeftPhotoresistor);
+    return analogRead(upperLeftPhotoresistor) + analogRead(lowerLeftPhotoresistor);
 }
 
 int getRightPhotoresistorTotal()
 {
-	return analogRead(upperRightPhotoresistor) + analogRead(lowerRightPhotoresistor);
+    return analogRead(upperRightPhotoresistor) + analogRead(lowerRightPhotoresistor);
 }
 
 void moveServoToPosition(Servo servo, int position)
 {
-	servo.write(position);
-	delay(servoDelay);
+    servo.write(position);
+    delay(servoDelay);
 }
